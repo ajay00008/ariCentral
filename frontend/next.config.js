@@ -5,7 +5,7 @@ const isProd = process.env.NODE_ENV === 'production'
 const remotePatterns = [
   {
     protocol: 'https',
-    hostname: 'cdn.aricentral.com',
+    hostname: 'd27wb9d3wdpfey.cloudfront.net',
     port: ''
   },
   {

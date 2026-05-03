@@ -32,6 +32,7 @@
     "dev": "strapi develop",
     "lint": "standard",
     "start": "strapi start",
+    "start:staging": "ENV_PATH=.env.staging strapi develop",
     "strapi": "strapi",
     "test": "npm run lint"
   },
