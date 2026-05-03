@@ -1,0 +1,28 @@
+{
+  "kind": "collectionType",
+  "collectionName": "password_reset_tokens",
+  "info": {
+    "singularName": "password-reset-token",
+    "pluralName": "password-reset-tokens",
+    "displayName": "Password Reset Token",
+    "description": ""
+  },
+  "options": {
+    "draftAndPublish": true
+  },
+  "pluginOptions": {},
+  "attributes": {
+    "token": {
+      "type": "text",
+      "required": true,
+      "unique": false
+    },
+    "expiresAt": {
+      "type": "datetime"
+    },
+    "email": {
+      "type": "string",
+      "required": true
+    }
+  }
+}

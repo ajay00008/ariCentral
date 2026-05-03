@@ -1,0 +1,115 @@
+{
+  "kind": "collectionType",
+  "collectionName": "units",
+  "info": {
+    "singularName": "unit",
+    "pluralName": "units",
+    "displayName": "unit",
+    "description": ""
+  },
+  "options": {
+    "draftAndPublish": true
+  },
+  "pluginOptions": {},
+  "attributes": {
+    "floor": {
+      "type": "relation",
+      "relation": "manyToOne",
+      "target": "api::floor.floor",
+      "inversedBy": "units"
+    },
+    "externalSize": {
+      "type": "float"
+    },
+    "internalSize": {
+      "type": "float"
+    },
+    "cars": {
+      "type": "integer"
+    },
+    "powder": {
+      "type": "integer"
+    },
+    "unitPlan": {
+      "type": "media",
+      "multiple": false,
+      "required": false,
+      "allowedTypes": [
+        "images"
+      ]
+    },
+    "order": {
+      "type": "integer"
+    },
+    "identifier": {
+      "type": "string",
+      "required": true
+    },
+    "status": {
+      "type": "enumeration",
+      "enum": [
+        "AVAILABLE",
+        "SOLD",
+        "RESERVED"
+      ],
+      "default": "AVAILABLE"
+    },
+    "aspect": {
+      "type": "enumeration",
+      "enum": [
+        "SOUTH",
+        "NORTH",
+        "WEST",
+        "EAST"
+      ],
+      "default": "SOUTH"
+    },
+    "type": {
+      "type": "enumeration",
+      "enum": [
+        "TOWNHOUSE",
+        "APARTMENT",
+        "HOUSE",
+        "PENTHOUSE",
+        "LAND",
+        "VILLA"
+      ],
+      "default": "TOWNHOUSE"
+    },
+    "unitGallery": {
+      "type": "media",
+      "multiple": true,
+      "required": false,
+      "allowedTypes": [
+        "images"
+      ]
+    },
+    "price": {
+      "type": "float"
+    },
+    "beds": {
+      "type": "string"
+    },
+    "baths": {
+      "type": "string"
+    },
+    "bodyCorp": {
+      "type": "integer"
+    },
+    "rentApp": {
+      "type": "integer"
+    },
+    "rates": {
+      "type": "integer"
+    },
+    "living": {
+      "type": "integer"
+    },
+    "positions": {
+      "type": "component",
+      "repeatable": true,
+      "component": "shared.unit-position",
+      "required": false
+    }
+  }
+}

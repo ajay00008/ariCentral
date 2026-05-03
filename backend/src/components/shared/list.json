@@ -1,0 +1,19 @@
+{
+  "collectionName": "components_shared_lists",
+  "info": {
+    "displayName": "List",
+    "icon": "apps"
+  },
+  "options": {},
+  "attributes": {
+    "Items": {
+      "displayName": "Items",
+      "type": "component",
+      "repeatable": true,
+      "component": "shared.items"
+    },
+    "Identifier": {
+      "type": "string"
+    }
+  }
+}

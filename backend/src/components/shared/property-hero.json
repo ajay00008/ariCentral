@@ -1,0 +1,21 @@
+{
+  "collectionName": "components_shared_property_heroes",
+  "info": {
+    "displayName": "PropertyHero"
+  },
+  "options": {},
+  "attributes": {
+    "Name": {
+      "type": "string",
+      "required": true
+    },
+    "Image": {
+      "allowedTypes": [
+        "images"
+      ],
+      "type": "media",
+      "multiple": false,
+      "required": true
+    }
+  }
+}

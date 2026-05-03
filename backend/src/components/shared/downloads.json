@@ -1,0 +1,32 @@
+{
+  "collectionName": "components_shared_downloads",
+  "info": {
+    "displayName": "Downloads"
+  },
+  "options": {},
+  "attributes": {
+    "downloadName": {
+      "type": "string"
+    },
+    "downloadFile": {
+      "allowedTypes": [
+        "images",
+        "files",
+        "videos",
+        "audios"
+      ],
+      "type": "media",
+      "multiple": false
+    },
+    "Icon": {
+      "type": "enumeration",
+      "enum": [
+        "Image",
+        "Chart",
+        "FloorPlan",
+        "Building"
+      ],
+      "default": "Image"
+    }
+  }
+}

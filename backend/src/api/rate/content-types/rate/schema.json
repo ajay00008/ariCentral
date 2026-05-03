@@ -1,0 +1,56 @@
+{
+  "kind": "singleType",
+  "collectionName": "rates",
+  "info": {
+    "singularName": "rate",
+    "pluralName": "rates",
+    "displayName": "rate",
+    "description": ""
+  },
+  "options": {
+    "draftAndPublish": false
+  },
+  "pluginOptions": {},
+  "attributes": {
+    "AUD": {
+      "type": "float",
+      "default": 1,
+      "required": true
+    },
+    "EUR": {
+      "type": "float"
+    },
+    "USD": {
+      "type": "float"
+    },
+    "SGD": {
+      "type": "float"
+    },
+    "GBP": {
+      "type": "float"
+    },
+    "CAD": {
+      "type": "float"
+    },
+    "BTC": {
+      "type": "float"
+    },
+    "BaseCurrency": {
+      "type": "enumeration",
+      "enum": [
+        "AUD",
+        "EUR",
+        "USD",
+        "SGD",
+        "GBP",
+        "CAD",
+        "BTC"
+      ],
+      "default": "AUD",
+      "required": true
+    },
+    "NZD": {
+      "type": "float"
+    }
+  }
+}

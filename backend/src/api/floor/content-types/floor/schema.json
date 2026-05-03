@@ -1,0 +1,32 @@
+{
+  "kind": "collectionType",
+  "collectionName": "floors",
+  "info": {
+    "singularName": "floor",
+    "pluralName": "floors",
+    "displayName": "floor",
+    "description": ""
+  },
+  "options": {
+    "draftAndPublish": true
+  },
+  "pluginOptions": {},
+  "attributes": {
+    "units": {
+      "type": "relation",
+      "relation": "oneToMany",
+      "target": "api::unit.unit",
+      "mappedBy": "floor"
+    },
+    "property": {
+      "type": "relation",
+      "relation": "manyToOne",
+      "target": "api::property.property",
+      "inversedBy": "floors"
+    },
+    "identifier": {
+      "type": "string",
+      "required": true
+    }
+  }
+}

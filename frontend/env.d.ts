@@ -1,0 +1,13 @@
+declare namespace NodeJS {
+  interface ProcessEnv {
+    NEXT_PUBLIC_GOOGLE_MAP_API: string
+    NEXT_PUBLIC_GOOGLE_MAP_ID: string
+    STRAPI_ENDPOINT: string
+    PUBLIC_URL: string
+    NEXT_PUBLIC_STRIPE_PUBLISHABLE_KEY: string
+    STRIPE_SECRET_KEY: string
+    STRIPE_MONTHLY_PRODUCT_ID: string
+    STRIPE_ANNUAL_PRODUCT_ID: string
+    WEBHOOK_REGISTER_FOR_UPDATES: string
+  }
+}

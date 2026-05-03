@@ -1,0 +1,11 @@
+.strapi/
+.tmp/
+build/
+coverage/
+dist/
+exports/
+public/uploads/*
+!public/uploads/.gitkeep
+types/generated/
+.strapi-updater.json
+compiler.js

@@ -1,0 +1,19 @@
+{
+  "collectionName": "components_shared_galleries",
+  "info": {
+    "displayName": "Gallery",
+    "description": ""
+  },
+  "options": {},
+  "attributes": {
+    "name": {
+      "type": "string",
+      "default": "GalleryName"
+    },
+    "SubGallery": {
+      "type": "component",
+      "repeatable": true,
+      "component": "shared.sub-gallery"
+    }
+  }
+}

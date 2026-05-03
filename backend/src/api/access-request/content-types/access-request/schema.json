@@ -1,0 +1,37 @@
+{
+  "kind": "collectionType",
+  "collectionName": "access_requests",
+  "info": {
+    "singularName": "access-request",
+    "pluralName": "access-requests",
+    "displayName": "Access Request",
+    "description": ""
+  },
+  "options": {
+    "draftAndPublish": false
+  },
+  "pluginOptions": {},
+  "attributes": {
+    "Status": {
+      "type": "enumeration",
+      "enum": [
+        "pending",
+        "approved",
+        "rejected"
+      ],
+      "default": "pending"
+    },
+    "User": {
+      "type": "relation",
+      "relation": "manyToOne",
+      "target": "plugin::users-permissions.user",
+      "inversedBy": "AccessRequests"
+    },
+    "Property": {
+      "type": "relation",
+      "relation": "manyToOne",
+      "target": "api::property.property",
+      "inversedBy": "AccessRequests"
+    }
+  }
+}

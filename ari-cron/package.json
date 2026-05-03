@@ -1,0 +1,22 @@
+{
+  "name": "ari-cron",
+  "description": "AriCentral cron job",
+  "version": "1.0.0",
+  "author": "DeltaPlata <contact@deltaplata.com>",
+  "private": true,
+  "dependencies": {
+    "@sentry/node": "^9.6.0",
+    "cron": "^4.1.0",
+    "dotenv": "^16.4.7"
+  },
+  "devDependencies": {
+    "nodemon": "^3.1.9",
+    "standard": "^17.1.2"
+  },
+  "scripts": {
+    "dev": "nodemon cron.js",
+    "lint": "standard",
+    "start": "node cron.js",
+    "test": "npm run lint"
+  }
+}

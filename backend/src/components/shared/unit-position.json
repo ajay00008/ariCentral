@@ -1,0 +1,22 @@
+{
+  "collectionName": "components_shared_unit_positions",
+  "info": {
+    "displayName": "UnitPosition",
+    "description": ""
+  },
+  "options": {},
+  "attributes": {
+    "imageId": {
+      "type": "integer",
+      "required": true
+    },
+    "x": {
+      "type": "float",
+      "required": true
+    },
+    "y": {
+      "type": "float",
+      "required": true
+    }
+  }
+}

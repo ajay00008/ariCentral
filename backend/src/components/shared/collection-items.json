@@ -1,0 +1,16 @@
+{
+  "collectionName": "components_shared_collection_items",
+  "info": {
+    "displayName": "collectionItems",
+    "description": ""
+  },
+  "options": {},
+  "attributes": {
+    "collectionElement": {
+      "displayName": "collectionElement",
+      "type": "component",
+      "repeatable": true,
+      "component": "shared.collection-element"
+    }
+  }
+}

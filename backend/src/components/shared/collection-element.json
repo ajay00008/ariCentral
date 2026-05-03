@@ -1,0 +1,15 @@
+{
+  "collectionName": "components_shared_collection_elements",
+  "info": {
+    "displayName": "collectionElement"
+  },
+  "options": {},
+  "attributes": {
+    "collectionElementHeading": {
+      "type": "string"
+    },
+    "collectionItemMarkdown": {
+      "type": "richtext"
+    }
+  }
+}

@@ -1,0 +1,57 @@
+.markdown h1 {
+  @apply smobile:text-[30px] smobile:font-mundialRegular smobile:leading-[1] smobile:text-customParagraphMarkdown smobile:mb-[40px];
+}
+
+.markdown h2 {
+  @apply smobile:text-[25px] smobile:font-mundialRegular smobile:leading-[1] smobile:text-customParagraphMarkdown smobile:mb-[20px];
+}
+
+.markdown h3 {
+  @apply smobile:text-[20px] smobile:font-mundialRegular smobile:leading-[1] smobile:text-customParagraphMarkdown smobile:mb-[20px];
+}
+
+.markdown h4 {
+  @apply smobile:text-[15px] smobile:font-mundialRegular smobile:leading-[1] smobile:text-customParagraphMarkdown smobile:mb-[20px];
+}
+
+.markdown h5 {
+  @apply smobile:text-[10px] smobile:font-mundialRegular smobile:leading-[1] smobile:text-customParagraphMarkdown smobile:mb-[20px];
+}
+
+.markdown h6 {
+  @apply smobile:text-[8px] smobile:font-mundialRegular smobile:leading-[1] smobile:text-customParagraphMarkdown smobile:mb-[20px];
+}
+
+.markdown p,
+u {
+  @apply smobile:text-[16px] smobile:font-mundialRegular smobile:leading-[1] smobile:text-customParagraphMarkdown smobile:mb-[30px] last:mb-0;
+}
+
+.markdown em {
+  @apply smobile:font-mundialRegular;
+}
+
+
+.markdown a {
+  @apply smobile:text-[16px] smobile:font-mundialRegular smobile:leading-[1] smobile:underline smobile:cursor-pointer smobile:text-blue-500 smobile:mb-[30px] smobile:last:mb-0;
+}
+
+.markdown ul {
+  @apply smobile:flex smobile:flex-col smobile:gap-[10px] smobile:list-disc smobile:text-[16px] smobile:font-mundialRegular smobile:leading-[1] smobile:text-customParagraphMarkdown smobile:pl-[15px] smobile:mb-[20px] smobile:last:mb-0;
+}
+
+.markdown ol {
+  @apply smobile:flex smobile:flex-col smobile:gap-[10px] smobile:list-decimal smobile:text-[16px] smobile:font-mundialRegular smobile:leading-[1] smobile:text-customParagraphMarkdown smobile:pl-[15px] smobile:mb-[20px] smobile:last:mb-0;
+}
+
+.markdown .mdxeditor-toolbar {
+  @apply smobile:max-w-[440px] smobile:min-w-[440px] desktop:max-w-[600px] desktop:min-w-[600px] bdesktop:max-w-[885px] bdesktop:min-w-[885px] overflow-hidden
+}
+
+.markdown .mdxeditor-root-contenteditable {
+  @apply smobile:max-w-[440px] smobile:min-w-[440px] desktop:max-w-[600px] desktop:min-w-[600px] bdesktop:max-w-[885px] bdesktop:min-w-[885px] smobile:max-h-[550px] smobile:min-h-[550px] smobile:overflow-y-scroll
+}
+
+.markdown-admin .mdxeditor-root-contenteditable [aria-label="editable markdown"] {
+  @apply smobile:h-[550px];
+}

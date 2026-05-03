@@ -1,0 +1,41 @@
+{
+  "name": "ari-strapi",
+  "description": "AriCentral Strapi application",
+  "version": "1.0.0",
+  "author": "DeltaPlata <contact@deltaplata.com>",
+  "private": true,
+  "dependencies": {
+    "@strapi/plugin-cloud": "^4.25.21",
+    "@strapi/plugin-i18n": "^4.25.21",
+    "@strapi/plugin-sentry": "^4.25.21",
+    "@strapi/plugin-users-permissions": "^4.25.21",
+    "@strapi/provider-email-mailgun": "^4.25.21",
+    "@strapi/provider-upload-aws-s3": "^4.25.21",
+    "@strapi/strapi": "^4.25.21",
+    "bcrypt": "^5.1.1",
+    "pg": "^8.14.1",
+    "react": "^18.3.1",
+    "react-dom": "^18.3.1",
+    "react-router-dom": "^5.3.4",
+    "strapi-plugin-populate-deep": "^3.0.1",
+    "styled-components": "5.3.3"
+  },
+  "devDependencies": {
+    "standard": "^17.1.2"
+  },
+  "engines": {
+    "node": ">=18.0.0",
+    "npm": ">=6.0.0"
+  },
+  "scripts": {
+    "build": "strapi build",
+    "dev": "strapi develop",
+    "lint": "standard",
+    "start": "strapi start",
+    "strapi": "strapi",
+    "test": "npm run lint"
+  },
+  "strapi": {
+    "uuid": "a501bca2-a43b-48b4-aa12-7cd66531e5f8"
+  }
+}
