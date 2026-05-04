@@ -216,12 +216,12 @@ export function ClientHeader ({ data, isSearchPage, isFAQ, collectionData, curre
             title='See all properties'
           >
             <Image
-              src='/logo.svg'
+              src='/walker-logo-dark.png'
               alt='Logo image'
-              width={69}
-              height={40}
+              width={1000}
+              height={1000}
               priority
-              className='max-w-[55px] max-h-[32px] object-contain'
+              className='max-w-[80px] max-h-[80px] object-contain aspect-square'
             />
           </Link>
           <div className='flex justify-end w-full items-center md:ml-auto smobile:gap-[4px] mobile:gap-[8px] tablet:gap-[12px]'>

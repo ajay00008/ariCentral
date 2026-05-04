@@ -77,12 +77,12 @@ export function Footer ({ isJustify }: FooterProps): React.ReactNode {
             title='See all properties'
           >
             <Image
-              src='/logo.svg'
+              src='/walker-logo-dark.png'
               alt='Logo image'
-              width={69}
-              height={40}
+              width={1000}
+              height={1000}
               priority
-              className='max-w-[70px] max-h-[40px] object-contain'
+              className='max-w-[100px] max-h-[100px] object-contain aspect-square'
             />
           </Link>
         </div>

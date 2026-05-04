@@ -374,7 +374,7 @@ export function PropertyBrochure ({ data, currency }: Props): React.ReactNode {
             </Text>
             <Image
               source={{
-                uri: '/logo.png',
+                uri: '/walker-logo-dark.png',
                 method: 'GET',
                 body: null,
                 headers: {}
@@ -437,7 +437,7 @@ export function PropertyBrochure ({ data, currency }: Props): React.ReactNode {
             </Text>
             <Image
               source={{
-                uri: '/logo.png',
+                uri: '/walker-logo-dark.png',
                 method: 'GET',
                 body: null,
                 headers: {}

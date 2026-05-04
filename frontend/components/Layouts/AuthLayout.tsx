@@ -17,13 +17,13 @@ export function AuthLayout ({ children, lastProperty }: Readonly<AuthLayoutProps
         <div className='smobile:relative smobile:inset-0 smobile:items-center smobile:justify-center smobile:z-50 laptop:w-[50%]'>
           <div className='smobile:bg-grey smobile:px-[16px] tablet:px-[32px] smobile:mr-auto smobile:min-h-screen tablet:h-screen smobile:w-full smobile:flex smobile:flex-col smobile:gap-[48px]'>
             <Image
-              src='/logo.png'
+              src='/walker-logo-dark.png'
               alt='Logo image'
-              width={55}
-              height={32}
+              width={1000}
+              height={1000}
               priority
               quality={100}
-              className='smobile:w-[55px] smobile:h-[32px] smobile:mt-[48px] tablet:mt-[28px] object-contain'
+              className='smobile:w-[80px] smobile:h-[80px] smobile:mt-[80px] tablet:mt-[80px] object-contain aspect-square'
             />
             <React.Suspense fallback={<div>Loading...</div>}>
               {children}

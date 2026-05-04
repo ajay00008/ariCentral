@@ -56,7 +56,7 @@ export function SummarySection ({ data }: SummarySectionProps): React.ReactNode 
   ]
 
   const filteredColumns = columns.filter(
-    (it) => !it.text.endsWith(' disabled')
+    (it) => !it?.text?.endsWith?.(' disabled')
   )
   const hasFacilities = (data.Facilities?.Items.length ?? 0) > 0
   const hasSummary = data.Summary !== ''
