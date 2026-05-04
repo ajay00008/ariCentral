@@ -15,7 +15,7 @@ export async function generateMetadata (): Promise<Metadata> {
   const faq = await getFAQCollection()
   if (session === null || faq === null) notFound()
   return {
-    title: 'AriCentral Admin - FAQ',
+    title: 'walkerwholesale Admin - FAQ',
     robots: {
       index: false,
       follow: false

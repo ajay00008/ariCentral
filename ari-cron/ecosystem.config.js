@@ -1,7 +1,7 @@
 module.exports = {
   apps: [
     {
-      name: 'ari-cron',
+      name: 'walker-cron',
       script: 'npm',
       cwd: __dirname,
       args: 'run start',

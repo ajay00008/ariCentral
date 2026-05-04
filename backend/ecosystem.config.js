@@ -1,7 +1,7 @@
 module.exports = {
   apps: [
     {
-      name: 'ari-strapi-blue',
+      name: 'walker-strapi-blue',
       script: 'npm',
       cwd: __dirname,
       args: 'run start',

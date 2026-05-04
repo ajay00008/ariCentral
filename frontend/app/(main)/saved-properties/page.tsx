@@ -12,7 +12,7 @@ export async function generateMetadata (): Promise<Metadata> {
   if (session === null) notFound()
 
   return {
-    title: 'AriCentral - Saved properties',
+    title: 'walkerwholesale - Saved properties',
     robots: {
       index: false,
       follow: false

@@ -12,7 +12,7 @@ export async function generateMetadata (): Promise<Metadata> {
   if (session === null) notFound()
 
   return {
-    title: 'AriCentral - Search',
+    title: 'walkerwholesale - Search',
     robots: {
       index: false,
       follow: false

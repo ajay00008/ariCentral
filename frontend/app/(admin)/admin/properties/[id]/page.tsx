@@ -22,7 +22,7 @@ export async function generateMetadata ({ params }: AdminPropertyPageProps): Pro
   }
 
   return {
-    title: `AriCentral Admin - ${data.attributes.Name}`,
+    title: `walkerwholesale Admin - ${data.attributes.Name}`,
     robots: {
       index: false,
       follow: false

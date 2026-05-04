@@ -1,7 +1,7 @@
 module.exports = {
   apps: [
     {
-      name: 'ari-web-green',
+      name: 'walker-web-green',
       script: 'npm',
       cwd: __dirname,
       args: 'run start -- -p 3001',

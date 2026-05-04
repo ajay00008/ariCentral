@@ -9,7 +9,7 @@ import { getLastProperty } from '@/app/actions'
 
 export function generateMetadata (): Metadata {
   return {
-    title: 'AriCentral - Reset Password',
+    title: 'walkerwholesale - Reset Password',
     robots: {
       index: false,
       follow: false

@@ -88,7 +88,7 @@ export function Footer ({ isJustify }: FooterProps): React.ReactNode {
         </div>
         <div className='smobile:flex items-center flex-wrap smobile:w-full laptop:hidden laptop:h-0'>
           <p className='font-mundialLight smobile:text-[16px] smobile:leading-[1] flex flex-wrap gap-[5px] max-w-[394px]'>
-            Ari @ {new Date().getFullYear()} |
+            Walker @ {new Date().getFullYear()} |
             {footerLinks.map((footerLink, idx, arr) => (
               <Link
                 className='font-mundialLight smobile:text-[16px] smobile:leading-[1] transition duration-200 hover:underline'
@@ -102,7 +102,7 @@ export function Footer ({ isJustify }: FooterProps): React.ReactNode {
         </div>
         <div className='items-center smobile:w-full smobile:hidden smobile:h-0 laptop:flex laptop:h-auto laptop:w-fit'>
           <p className='pr-[10px] font-mundialLight smobile:text-[16px] smobile:leading-[1] w-fit whitespace-nowrap'>
-            Ari @ {new Date().getFullYear()}
+            Walker @ {new Date().getFullYear()}
           </p>
           <ul className='flex border-l border-black pl-[10px] w-fit flex-wrap gap-[5px]'>
             {footerLinks.map((footerLink, idx, arr) => (

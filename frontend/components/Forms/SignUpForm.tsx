@@ -567,7 +567,7 @@ export function SignUpForm (): React.ReactNode {
               </div>
               <div className='smobile:grid gap-[15px]'>
                 <Label htmlFor='introduced' className='smobile:font-mundialLight smobile:text-customTextBlack smobile:leading-[1] smobile:text-[12px]'>
-                  Who introduced you to Ari?
+                  Who introduced you to Walker?
                 </Label>
                 <Select
                   value={formData.introduced}

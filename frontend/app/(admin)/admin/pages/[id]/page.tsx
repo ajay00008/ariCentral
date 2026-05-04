@@ -18,7 +18,7 @@ export async function generateMetadata ({ params }: { params: { id: string } }):
   const pageData = data.dynamicData
 
   return {
-    title: `AriCentral Admin - ${pageData.Name ?? ''}`,
+    title: `walkerwholesale Admin - ${pageData.Name ?? ''}`,
     robots: {
       index: false,
       follow: false

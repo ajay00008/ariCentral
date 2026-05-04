@@ -1,6 +1,6 @@
 {
-  "name": "ari-strapi",
-  "description": "AriCentral Strapi application",
+  "name": "walker-strapi",
+  "description": "walkerwholesale Strapi application",
   "version": "1.0.0",
   "author": "DeltaPlata <contact@deltaplata.com>",
   "private": true,

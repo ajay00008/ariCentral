@@ -16,7 +16,7 @@ export async function generateMetadata ({ params }: { params: { slug: string } }
   if (data === null) notFound()
 
   return {
-    title: `AriCentral - ${data.Name} Downloads`,
+    title: `walkerwholesale - ${data.Name} Downloads`,
     robots: {
       index: false,
       follow: false

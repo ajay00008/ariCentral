@@ -44,9 +44,9 @@ module.exports = createCoreController(
           await strapi.plugins.email.services.email.send({
             to: request.User.email,
             from: process.env.MAILGUN_EMAIL,
-            subject: 'Your Access Request has been Approved - AriCentral',
-            text: `Hi ${request.User.username},\n\nYour access request for the property "${request.Property.Name}" has been approved. You can now view the property details.\n\nThanks,\nThe AriCentral Team`,
-            html: `<p>Hi ${request.User.username},</p><p>Your access request for the property "<strong>${request.Property.Name}</strong>" has been approved. You can now view the property details.</p><p>Thanks,<br>The AriCentral Team</p>`
+            subject: 'Your Access Request has been Approved - walkerwholesale',
+            text: `Hi ${request.User.username},\n\nYour access request for the property "${request.Property.Name}" has been approved. You can now view the property details.\n\nThanks,\nThe walkerwholesale Team`,
+            html: `<p>Hi ${request.User.username},</p><p>Your access request for the property "<strong>${request.Property.Name}</strong>" has been approved. You can now view the property details.</p><p>Thanks,<br>The walkerwholesale Team</p>`
           })
         }
 
@@ -84,9 +84,9 @@ module.exports = createCoreController(
           await strapi.plugins.email.services.email.send({
             to: request.User.email,
             from: process.env.MAILGUN_EMAIL,
-            subject: 'Your Access Request has been Rejected - AriCentral',
-            text: `Hi ${request.User.username},\n\nUnfortunately, your access request for the property has been rejected at this time.\n\nThanks,\nThe AriCentral Team`,
-            html: `<p>Hi ${request.User.username},</p><p>Unfortunately, your access request for the property has been rejected at this time.</p><p>Thanks,<br>The AriCentral Team</p>`
+            subject: 'Your Access Request has been Rejected - walkerwholesale',
+            text: `Hi ${request.User.username},\n\nUnfortunately, your access request for the property has been rejected at this time.\n\nThanks,\nThe walkerwholesale Team`,
+            html: `<p>Hi ${request.User.username},</p><p>Unfortunately, your access request for the property has been rejected at this time.</p><p>Thanks,<br>The walkerwholesale Team</p>`
           })
         }
 
@@ -132,9 +132,9 @@ module.exports = createCoreController(
           await strapi.plugins.email.services.email.send({
             to: request.User.email,
             from: process.env.MAILGUN_EMAIL,
-            subject: 'Your Access has been Revoked - AriCentral',
-            text: `Hi ${request.User.username},\n\nYour access to the property "${request.Property.Name}" has been revoked and the status has been set to pending.\n\nThanks,\nThe AriCentral Team`,
-            html: `<p>Hi ${request.User.username},</p><p>Your access to the property "<strong>${request.Property.Name}</strong>" has been revoked and the status has been set to pending.</p><p>Thanks,<br>The AriCentral Team</p>`
+            subject: 'Your Access has been Revoked - walkerwholesale',
+            text: `Hi ${request.User.username},\n\nYour access to the property "${request.Property.Name}" has been revoked and the status has been set to pending.\n\nThanks,\nThe walkerwholesale Team`,
+            html: `<p>Hi ${request.User.username},</p><p>Your access to the property "<strong>${request.Property.Name}</strong>" has been revoked and the status has been set to pending.</p><p>Thanks,<br>The walkerwholesale Team</p>`
           })
         }
 

@@ -12,7 +12,7 @@ export async function generateMetadata (): Promise<Metadata> {
     notFound()
   }
   return {
-    title: 'AriCentral - FAQ',
+    title: 'walkerwholesale - FAQ',
     robots: {
       index: false,
       follow: false

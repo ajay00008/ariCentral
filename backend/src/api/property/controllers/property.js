@@ -134,9 +134,9 @@ module.exports = createCoreController(
 
         if (process.env.NODE_ENV === 'production') {
           await strapi.plugins.email.services.email.send({
-            to: 'concierge@aricentral.com',
+            to: 'concierge@walkerwholesale.com',
             from: process.env.MAILGUN_EMAIL,
-            subject: 'Property Access Request - AriCentral',
+            subject: 'Property Access Request - walkerwholesale',
             text: `Hey ${user.email}, has requested access to the property: ${property.Name}. Please review and approve or deny the request.`,
             html: `<p>Hey ${user.email}, has requested access to the property: ${property.Name}. Please review and approve or deny the request.</p>`
           })
@@ -402,9 +402,9 @@ module.exports = createCoreController(
           const sendedEmail = await strapi.plugins.email.services.email.send({
             to: email,
             from: process.env.MAILGUN_EMAIL,
-            subject: 'Account registration pending - AriCentral',
-            text: `Hey ${userName}, your registration to AriCentral is pending we will reach out once your account is activated.`,
-            html: `<p>Hey ${userName}, your registration to AriCentral is pending we will reach out once your account is activated.</p>`
+            subject: 'Account registration pending - walkerwholesale',
+            text: `Hey ${userName}, your registration to walkerwholesale is pending we will reach out once your account is activated.`,
+            html: `<p>Hey ${userName}, your registration to walkerwholesale is pending we will reach out once your account is activated.</p>`
           })
 
           return ctx.send(
@@ -424,18 +424,18 @@ module.exports = createCoreController(
         const { userName, email, confirmed } = ctx.request.body
         const sendText =
           confirmed === true
-            ? `Hey ${userName}, you may now login to the AriCentral platform.`
-            : `Hey ${userName}, your account was frozen by administrator, you cant login to the AriCentral platform for now.`
+            ? `Hey ${userName}, you may now login to the walkerwholesale platform.`
+            : `Hey ${userName}, your account was frozen by administrator, you cant login to the walkerwholesale platform for now.`
         const sendHtml =
           confirmed === true
-            ? `<p>Hey ${userName}, you may now login to the AriCentral platform.</p>`
-            : `<p>Hey ${userName}, your account was frozen by administrator, you cant login to the AriCentral platform for now.</p>`
+            ? `<p>Hey ${userName}, you may now login to the walkerwholesale platform.</p>`
+            : `<p>Hey ${userName}, your account was frozen by administrator, you cant login to the walkerwholesale platform for now.</p>`
 
         try {
           const sendedEmail = await strapi.plugins.email.services.email.send({
             to: email,
             from: process.env.MAILGUN_EMAIL,
-            subject: 'Account Confirmation - AriCentral',
+            subject: 'Account Confirmation - walkerwholesale',
             text: sendText,
             html: sendHtml
           })

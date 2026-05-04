@@ -13,7 +13,7 @@ export async function generateMetadata (): Promise<Metadata> {
   const session: SessionType | null = await getServerSession(authOptions)
   if (session === null) notFound()
   return {
-    title: 'AriCentral Admin - Users',
+    title: 'walkerwholesale Admin - Users',
     robots: {
       index: false,
       follow: false

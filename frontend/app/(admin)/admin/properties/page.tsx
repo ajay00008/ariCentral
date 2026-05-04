@@ -8,7 +8,7 @@ export const dynamic = 'force-dynamic'
 
 export function generateMetadata (): Metadata {
   return {
-    title: 'AriCentral Admin - Properties',
+    title: 'walkerwholesale Admin - Properties',
     robots: {
       index: false,
       follow: false

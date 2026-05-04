@@ -1,6 +1,6 @@
 {
-  "name": "ari-cron",
-  "description": "AriCentral cron job",
+  "name": "walker-cron",
+  "description": "walkerwholesale cron job",
   "version": "1.0.0",
   "author": "DeltaPlata <contact@deltaplata.com>",
   "private": true,

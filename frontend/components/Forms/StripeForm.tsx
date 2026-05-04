@@ -125,7 +125,7 @@ export function StripeForm ({ publicUrl }: StripeFormProps): React.ReactNode {
                       checked={subscriptionType === 'monthly'}
                       onChange={() => setSubscriptionType('monthly')}
                     />
-                    <span>Ari Monthly Subscription - $99 USD</span>
+                    <span>Walker Monthly Subscription - $99 USD</span>
                   </label>
                   <label className='flex items-center gap-2'>
                     <input
@@ -135,7 +135,7 @@ export function StripeForm ({ publicUrl }: StripeFormProps): React.ReactNode {
                       checked={subscriptionType === 'annual'}
                       onChange={() => setSubscriptionType('annual')}
                     />
-                    <span>Ari Annual Subscription - $990 USD (10 months @ $99/mth)</span>
+                    <span>Walker Annual Subscription - $990 USD (10 months @ $99/mth)</span>
                   </label>
                 </div>
                 <p className='text-md text-orange'>*Free for the first 90 days, cancel anytime.</p>

@@ -164,7 +164,7 @@ export function AboutUsSection ({ data, isPreview }: Props): React.ReactNode {
           {isPreview !== true && (
             <div className='smobile:w-auto smobile:h-auto'>
               <Link
-                href='mailto:concierge@aricentral.com'
+                href='mailto:concierge@walkerwholesale.com'
                 className='group smobile:block smobile:h-[68px] laptop:h-[126px] desktop:h-[136px] smobile:p-[16px] laptop:p-[18px] bdesktop:p-[33px] smobile:w-full laptop:w-[280px] smobile:relative smobile:bg-white smobile:text-black smobile:hover:bg-orange smobile:hover:text-white transition duration-200'
               >
                 <div className='smobile:w-full smobile:h-full smobile:flex smobile:flex-col'>
@@ -172,7 +172,7 @@ export function AboutUsSection ({ data, isPreview }: Props): React.ReactNode {
                     Got An Enquiry?
                   </p>
                   <p className='smobile:text-[16px] smobile:leading-[1] smobile:font-mundialRegular bdesktop:text-[24px]'>
-                    Ask Ari
+                    Ask Walker
                   </p>
                 </div>
                 <assets.ChevronRightSVG
