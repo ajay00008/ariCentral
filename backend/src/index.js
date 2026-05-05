@@ -10,15 +10,23 @@ module.exports = {
 
       if (!role) return
 
-      await strapi
-        .query('plugin::users-permissions.permission')
-        .updateMany({
-          where: {
-            role: role.id,
-            action
-          },
-          data: { enabled }
-        })
+      const roleService = strapi.plugin('users-permissions').service('role')
+      const roleWithPermissions = await roleService.findOne(role.id)
+      const [typeName, controllerName, actionName] = action.split('.')
+
+      if (
+        roleWithPermissions.permissions?.[typeName]?.controllers?.[controllerName]?.[actionName] === undefined
+      ) {
+        return
+      }
+
+      roleWithPermissions.permissions[typeName].controllers[controllerName][actionName].enabled = enabled
+
+      await roleService.updateRole(role.id, {
+        name: role.name,
+        description: role.description,
+        permissions: roleWithPermissions.permissions
+      })
     }
 
     await Promise.all([
