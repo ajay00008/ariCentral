@@ -7,6 +7,7 @@ import { authOptions } from '@/app/api/auth/[...nextauth]/options'
 import { z } from 'zod'
 
 export const dynamic = 'force-dynamic'
+const allowPublicProperties = process.env.NEXT_PUBLIC_ALLOW_PUBLIC_PROPERTIES === 'true'
 
 const schema = z.object({
   slug: z.string()
@@ -16,7 +17,7 @@ export async function GET (request: NextRequest): Promise<NextResponse> {
   try {
     const session: SessionType | null = await getServerSession(authOptions)
     const sessionToken = session?.user?.access_token ?? ''
-    if (sessionToken === '') return NextResponse.json({ message: 'Please, use our official application' }, { status: 503 })
+    if (!allowPublicProperties && sessionToken === '') return NextResponse.json({ message: 'Please, use our official application' }, { status: 503 })
 
     const result = await schema.safeParseAsync(Object.fromEntries(request.nextUrl.searchParams))
 
@@ -26,7 +27,7 @@ export async function GET (request: NextRequest): Promise<NextResponse> {
 
     const response: Response = await fetchAPI(
       `/api/properties?filters[Slug][$eq]=${result.data.slug.trim()}&populate=*`,
-      { token: sessionToken }
+      { token: allowPublicProperties ? undefined : sessionToken }
     )
 
     if (!response.ok) {

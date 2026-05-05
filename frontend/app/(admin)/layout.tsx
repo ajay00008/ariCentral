@@ -20,6 +20,8 @@ interface RootLayoutProps {
   children: React.ReactNode
 }
 
+const allowPublicProperties = process.env.NEXT_PUBLIC_ALLOW_PUBLIC_PROPERTIES === 'true'
+
 export function generateMetadata (): Metadata {
   return {
     robots: {
@@ -31,7 +33,12 @@ export function generateMetadata (): Metadata {
 
 export default async function RootLayout ({ children }: RootLayoutProps): Promise<React.ReactNode> {
   const session: SessionType | null = await getServerSession(authOptions)
-  if (session?.user?.role !== 'Admin') {
+  if (allowPublicProperties && session === null) {
+    redirect('/login')
+  }
+  if (allowPublicProperties && session?.user?.role !== 'Admin') {
+    redirect('/')
+  } else if (!allowPublicProperties && session?.user?.role !== 'Admin') {
     redirect('/search')
   } else if (session?.user?.blocked === true) {
     return (

@@ -47,10 +47,12 @@ export function closeModalWithAnimation (elementId: string, isNested?: boolean):
 export function UnitDetailsModal ({ data, currency, isPreview }: Props): React.ReactNode {
   const { closeModal, isModalOpen, tab, unitId } = useUnitModalProvider()
   const { data: session } = useSession()
-  if (session === null && isPreview !== true) {
+  const allowPublicProperties = process.env.NEXT_PUBLIC_ALLOW_PUBLIC_PROPERTIES === 'true'
+  if (!allowPublicProperties && session === null && isPreview !== true) {
     return null
   }
-  const user = session as SessionType
+
+  const user = session as SessionType | null
   const [stableUnitId, setStableUnitId] = React.useState<number | null>(unitId)
   const [unitData, setUnitData] = React.useState<CustomUnit | undefined>(undefined)
   const [currentFloorData, setCurrentFloorData] = React.useState<Floor | undefined>(undefined)

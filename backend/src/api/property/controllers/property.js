@@ -11,18 +11,25 @@ const { formatUSAddress } = require('../../../utils/helper')
  */
 
 const { createCoreController } = require('@strapi/strapi').factories
+const allowPublicProperties = process.env.ALLOW_PUBLIC_PROPERTIES === 'true'
 
 module.exports = createCoreController(
   'api::property.property',
   ({ strapi }) => ({
     async find (ctx) {
       const user = ctx.state.user
+      if (!allowPublicProperties && !user) {
+        return ctx.unauthorized('You must be logged in to access this resource.')
+      }
+
+      const isPublicRequest = allowPublicProperties && !user
+      const isAdmin = user?.role?.name === 'Admin'
 
       const response = await super.find(ctx)
       const properties = response.data
 
       const findLowerPricedUnit = (floors) => {
-        return floors?.data.reduce((lowestUnit, floor) => {
+        return floors?.data?.reduce((lowestUnit, floor) => {
           const floorUnits = floor.attributes?.units?.data || []
           const floorLowestUnit = floorUnits.reduce((lowest, unit) => {
             return !lowest || unit.attributes.price < lowest.attributes.price
@@ -39,8 +46,10 @@ module.exports = createCoreController(
       const filtered = properties.map((property) => {
         const attrs = property.attributes
         const lowerPricedUnit = findLowerPricedUnit(attrs.floors)
-        const isApproved = attrs.ApprovedUsers?.data.some((u) => u.id === user.id)
-        const request = attrs.AccessRequests?.data.find((r) => r.attributes?.User?.data.id === user.id)
+        const isApproved = !isPublicRequest && attrs.ApprovedUsers?.data?.some((u) => u.id === user.id) === true
+        const request = !isPublicRequest
+          ? attrs.AccessRequests?.data?.find((r) => r.attributes?.User?.data?.id === user.id)
+          : undefined
 
         delete attrs.AccessRequests
         delete attrs.ApprovedUsers
@@ -67,7 +76,7 @@ module.exports = createCoreController(
           HeroImages: attrs.HeroImages
         }
 
-        if (isApproved || request?.attributes?.Status === 'approved' || user.role.name === 'Admin') {
+        if (isPublicRequest || isApproved || request?.attributes?.Status === 'approved' || isAdmin) {
           return {
             ...property,
             attributes: {
@@ -96,6 +105,55 @@ module.exports = createCoreController(
       return {
         data: filtered,
         meta: response.meta
+      }
+    },
+    async findOne (ctx) {
+      if (!allowPublicProperties) {
+        return await super.findOne(ctx)
+      }
+
+      const response = await super.findOne(ctx)
+      const attrs = response?.data?.attributes
+
+      if (!attrs) {
+        return response
+      }
+
+      const lowerPricedUnit = attrs.floors?.data?.reduce((lowestUnit, floor) => {
+        const floorUnits = floor.attributes?.units?.data || []
+        const floorLowestUnit = floorUnits.reduce((lowest, unit) => {
+          return !lowest || unit.attributes.price < lowest.attributes.price
+            ? unit
+            : lowest
+        }, null)
+
+        return !lowestUnit || (floorLowestUnit && floorLowestUnit.attributes.price < lowestUnit.attributes.price)
+          ? floorLowestUnit
+          : lowestUnit
+      }, null)
+
+      delete attrs.AccessRequests
+      delete attrs.ApprovedUsers
+
+      return {
+        ...response,
+        data: {
+          ...response.data,
+          attributes: {
+            ...attrs,
+            Address: formatUSAddress(attrs),
+            Approved: true,
+            RequestStatus: 'approved',
+            LowerPricedUnit: lowerPricedUnit
+              ? {
+                  id: lowerPricedUnit.id,
+                  attributes: {
+                    price: lowerPricedUnit.attributes.price
+                  }
+                }
+              : null
+          }
+        }
       }
     },
     async requestAccess (ctx) {

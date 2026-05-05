@@ -6,6 +6,8 @@ import { getServerSession } from 'next-auth'
 import { authOptions } from '@/app/api/auth/[...nextauth]/options'
 import { z } from 'zod'
 
+const allowPublicProperties = process.env.NEXT_PUBLIC_ALLOW_PUBLIC_PROPERTIES === 'true'
+
 const realFieldnames: Record<string, string> = {
   mainQ: 'filters[Name][$containsi]',
   StreetAddress1: 'filters[StreetAddress1][$containsi]',
@@ -115,7 +117,7 @@ export async function POST (request: Request): Promise<NextResponse> {
 
     const session: SessionType | null = await getServerSession(authOptions)
     const sessionToken = session?.user?.access_token ?? ''
-    if (sessionToken === '') {
+    if (!allowPublicProperties && sessionToken === '') {
       return NextResponse.json(
         { message: 'Please, use our official application' },
         { status: 503 }
@@ -137,7 +139,7 @@ export async function POST (request: Request): Promise<NextResponse> {
     const searchUrl = `/api/properties?${qs}&pagination[page]=${page}&pagination[pageSize]=${pageSize}`
     const resp: Response = await fetchAPI(
       searchUrl,
-      { token: sessionToken },
+      { token: allowPublicProperties ? undefined : sessionToken },
       false,
       true
     )

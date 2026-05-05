@@ -8,6 +8,7 @@ import { authOptions } from '@/app/api/auth/[...nextauth]/options'
 import { getDynamicPageFromCollectionById, getStaticPageById } from '@/app/actions'
 
 export const dynamic = 'force-dynamic'
+const allowPublicProperties = process.env.NEXT_PUBLIC_ALLOW_PUBLIC_PROPERTIES === 'true'
 
 export async function generateMetadata ({ params }: { params: { slug: string } }): Promise<Metadata> {
   const data2 = await getDynamicPageFromCollectionById(params.slug)
@@ -26,11 +27,11 @@ export async function generateMetadata ({ params }: { params: { slug: string } }
   const session: SessionType | null = await getServerSession(authOptions)
   const sessionToken = session?.user?.access_token ?? ''
 
-  if (sessionToken === '') {
+  if (!allowPublicProperties && sessionToken === '') {
     notFound()
   }
 
-  const data = await getStaticPageById(params.slug, sessionToken)
+  const data = await getStaticPageById(params.slug, allowPublicProperties ? undefined : sessionToken)
 
   if (data !== null) {
     return {
@@ -56,15 +57,19 @@ export default async function Page ({ params }: { params: { slug: string } }): P
   const session: SessionType | null = await getServerSession(authOptions)
   const sessionToken = session?.user?.access_token ?? ''
 
-  if (sessionToken === '') {
+  if (!allowPublicProperties && sessionToken === '') {
     redirect('/login')
   }
 
-  const serverData = await getStaticPageById(params.slug, sessionToken)
+  const serverData = await getStaticPageById(params.slug, allowPublicProperties ? undefined : sessionToken)
 
   if (serverData !== null) {
     return <DynamicView data={serverData} />
   }
 
-  redirect('/login')
+  if (!allowPublicProperties) {
+    redirect('/login')
+  }
+
+  notFound()
 }

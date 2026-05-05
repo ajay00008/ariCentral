@@ -4,6 +4,7 @@ declare namespace NodeJS {
     NEXT_PUBLIC_GOOGLE_MAP_ID: string
     STRAPI_ENDPOINT: string
     PUBLIC_URL: string
+    NEXT_PUBLIC_ALLOW_PUBLIC_PROPERTIES?: string
     NEXT_PUBLIC_STRIPE_PUBLISHABLE_KEY: string
     STRIPE_SECRET_KEY: string
     STRIPE_MONTHLY_PRODUCT_ID: string

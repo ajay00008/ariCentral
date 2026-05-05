@@ -16,7 +16,7 @@ import { SavedPropertySection } from '@/components/DynamicMainComponents/SavedPr
 import { SEARCH_PAGE_SIZE } from '@/constants/variable'
 
 interface Props {
-  user: SessionType
+  user: SessionType | null
   isSavedProperties?: boolean
 }
 
@@ -406,8 +406,8 @@ export function DynamicSearch ({ user, isSavedProperties = false }: Props): Reac
             badgeArray={queryArray}
             featuredProperties={featuredProperties}
             amountOfFiltersActive={amountOfFiltersActive}
-            userName={user.user?.firstName ?? ''}
-            isCommissionEnabled={user.user?.showCommission ?? false}
+            userName={user?.user?.firstName ?? ''}
+            isCommissionEnabled={user?.user?.showCommission ?? false}
           />
         )}
         {searchResultData === null && isSavedProperties && (
@@ -421,8 +421,8 @@ export function DynamicSearch ({ user, isSavedProperties = false }: Props): Reac
             onBadgeDelete={handleBadgeRemove}
             badgeArray={queryArray}
             amountOfFiltersActive={amountOfFiltersActive}
-            userName={user.user?.firstName ?? ''}
-            isCommissionEnabled={user.user?.showCommission ?? false}
+            userName={user?.user?.firstName ?? ''}
+            isCommissionEnabled={user?.user?.showCommission ?? false}
           />
         )}
         {searchResultData !== null && (
@@ -444,7 +444,7 @@ export function DynamicSearch ({ user, isSavedProperties = false }: Props): Reac
             })()}
             amountOfFiltersActive={amountOfFiltersActive}
             addresses={addresses}
-            isCommissionEnabled={user.user?.showCommission ?? false}
+            isCommissionEnabled={user?.user?.showCommission ?? false}
             loading={loading || resultsLoadingMore}
             skeletonCount={SEARCH_PAGE_SIZE}
             setBottomSentinel={setResultsBottomSentinel}

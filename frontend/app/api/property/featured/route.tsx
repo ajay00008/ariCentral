@@ -6,15 +6,16 @@ import { getServerSession } from 'next-auth'
 import { authOptions } from '@/app/api/auth/[...nextauth]/options'
 
 export const dynamic = 'force-dynamic'
+const allowPublicProperties = process.env.NEXT_PUBLIC_ALLOW_PUBLIC_PROPERTIES === 'true'
 
 export async function GET (): Promise<NextResponse> {
   try {
     const session: SessionType | null = await getServerSession(authOptions)
     const sessionToken = session?.user?.access_token ?? ''
-    if (sessionToken === '') return NextResponse.json({ message: 'Please, use our official application' }, { status: 503 })
+    if (!allowPublicProperties && sessionToken === '') return NextResponse.json({ message: 'Please, use our official application' }, { status: 503 })
 
     const response: Response = await fetchAPI('/api/properties?filters[Featured]=true&populate[0]=floors.units,ApprovedUsers,AccessRequests.User,HeroImage,HeroImages,HeroImages.Image', {
-      token: sessionToken
+      token: allowPublicProperties ? undefined : sessionToken
     }, false, true)
     const data = await response.json()
     const allProperties: PropertyMain[] = data.data

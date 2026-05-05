@@ -7,9 +7,11 @@ import { AuthLayout } from '@/components/Layouts/AuthLayout'
 import { authOptions } from '@/app/api/auth/[...nextauth]/options'
 import { getLastProperty } from '@/app/actions'
 
+const allowPublicProperties = process.env.NEXT_PUBLIC_ALLOW_PUBLIC_PROPERTIES === 'true'
+
 export function generateMetadata (): Metadata {
   return {
-    title: 'walkerwholesale - Login',
+    title: allowPublicProperties ? 'walkerwholesale - Admin Login' : 'walkerwholesale - Login',
     robots: {
       index: false,
       follow: false

@@ -31,6 +31,7 @@ export function AuthForm ({ login }: AuthFormProps): React.ReactNode {
     password: ''
   })
   const [loading, setLoading] = React.useState<boolean>(false)
+  const allowPublicProperties = process.env.NEXT_PUBLIC_ALLOW_PUBLIC_PROPERTIES === 'true'
 
   function handleChange (e: React.ChangeEvent<HTMLInputElement>): void {
     const { value, name } = e.target
@@ -109,14 +110,16 @@ export function AuthForm ({ login }: AuthFormProps): React.ReactNode {
           <Button type='submit' disabled={loading} className='smobile:w-full smobile:h-auto smobile:py-[17px] smobile:min-h-[56px] smobile:mx-auto smobile:bg-orange smobile:font-mundialRegular smobile:text-customWhite smobile:font-normal smobile:text-[20px] smobile:leading-[1] disabled:opacity-50'>
             Continue
           </Button>
-          <div className='flex w-full justify-center smobile:mt-[16px]'>
-            <Link
-              href='/register'
-              className='smobile:flex smobile:gap-[5px] smobile:items-center smobile:font-mundialRegular smobile:text-customTextBlack smobile:leading-[1] smobile:text-[12px] bg-transparent justify-center'
-            >
-              Not a member? <span className='smobile:underline smobile:font-mundialRegular smobile:text-customTextBlack smobile:leading-[1] smobile:text-[12px]'>Sign Up</span>
-            </Link>
-          </div>
+          {!allowPublicProperties && (
+            <div className='flex w-full justify-center smobile:mt-[16px]'>
+              <Link
+                href='/register'
+                className='smobile:flex smobile:gap-[5px] smobile:items-center smobile:font-mundialRegular smobile:text-customTextBlack smobile:leading-[1] smobile:text-[12px] bg-transparent justify-center'
+              >
+                Not a member? <span className='smobile:underline smobile:font-mundialRegular smobile:text-customTextBlack smobile:leading-[1] smobile:text-[12px]'>Sign Up</span>
+              </Link>
+            </div>
+          )}
         </form>
       </CardContent>
     </Card>

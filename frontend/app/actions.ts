@@ -5,7 +5,7 @@ import { z } from 'zod'
 import { EventTypeKeys } from '@/constants/event-type'
 import { transformPropertyResponse } from '@/lib/utils'
 
-export async function getStaticPageById (id: string, sessionToken: string): Promise<ActionGetPropertyBySlug | null> {
+export async function getStaticPageById (id: string, sessionToken?: string): Promise<ActionGetPropertyBySlug | null> {
   const data: Response = await fetchAPI(`/api/properties?filters[Slug][$eq]=${id}&pagination[pageSize]=100&populate=deep`, {
     method: 'GET',
     token: sessionToken

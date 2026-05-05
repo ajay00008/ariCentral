@@ -7,6 +7,8 @@ import { AuthLayout } from '@/components/Layouts/AuthLayout'
 import { SignUpForm } from '@/components/Forms/SignUpForm'
 import { getLastProperty } from '@/app/actions'
 
+const allowPublicProperties = process.env.NEXT_PUBLIC_ALLOW_PUBLIC_PROPERTIES === 'true'
+
 export function generateMetadata (): Metadata {
   return {
     title: 'walkerwholesale - Register',
@@ -18,6 +20,10 @@ export function generateMetadata (): Metadata {
 }
 
 export default async function Page (): Promise<React.ReactNode> {
+  if (allowPublicProperties) {
+    redirect('/')
+  }
+
   const session: SessionType | null = await getServerSession(authOptions)
 
   if (session !== null) {

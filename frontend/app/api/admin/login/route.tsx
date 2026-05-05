@@ -32,7 +32,7 @@ export async function POST (request: Request): Promise<NextResponse<APIAdminLogi
       })
     }, false, true)
     const basicUser: APIAdminLoginResult['newUser'] = await response.json()
-    console.log(basicUser , 'basicUser')
+
     if (basicUser?.error?.message === 'Your account has been blocked by an administrator') {
       return NextResponse.json({
         code: basicUser.error.status,
@@ -53,7 +53,6 @@ export async function POST (request: Request): Promise<NextResponse<APIAdminLogi
       token: userJWT
     }, false, true)
     const res2 = await response2.json()
-    console.log(res2 , 'res2',response2.ok)
 
     if (!response2.ok) {
       return NextResponse.json({
@@ -71,8 +70,7 @@ export async function POST (request: Request): Promise<NextResponse<APIAdminLogi
       }
     }
     return NextResponse.json({ newUser }, { status: 200 })
-  } catch (err:any) {
-    console.log(err.message , 'err.message')
+  } catch (err: any) {
     Sentry.captureException(err)
     return NextResponse.json({
       code: Codes.INTERNAL_SERVER_ERROR.code,

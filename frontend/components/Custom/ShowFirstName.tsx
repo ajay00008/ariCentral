@@ -10,6 +10,8 @@ export function ShowFirstName ({ userName }: Props): React.ReactNode {
   const [firstName] = React.useState<string | undefined>(userName)
 
   return (
-    <h1 className='smobile:font-mundialRegular smobile:text-[40px] desktop:text-[56px] smobile:leading-[1] smobile:text-black smobile:text-center'>G’day, {firstName}!</h1>
+    <h1 className='smobile:font-mundialRegular smobile:text-[40px] desktop:text-[56px] smobile:leading-[1] smobile:text-black smobile:text-center'>
+      {firstName !== undefined && firstName !== '' ? `G'day, ${firstName}!` : 'Find your next property'}
+    </h1>
   )
 }
