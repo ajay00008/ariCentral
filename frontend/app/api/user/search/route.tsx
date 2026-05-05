@@ -5,8 +5,7 @@ import { fetchAPI } from '@/api/fetch-api'
 import { getServerSession } from 'next-auth'
 import { authOptions } from '@/app/api/auth/[...nextauth]/options'
 import { z } from 'zod'
-
-const allowPublicProperties = process.env.NEXT_PUBLIC_ALLOW_PUBLIC_PROPERTIES === 'true'
+import { isPublicPropertiesEnabled } from '@/lib/public-properties'
 
 const realFieldnames: Record<string, string> = {
   mainQ: 'filters[Name][$containsi]',
@@ -106,6 +105,7 @@ function buildQueryString (filterParams: FilterParamsSearchAction): string {
 
 export async function POST (request: Request): Promise<NextResponse> {
   try {
+    const allowPublicProperties = isPublicPropertiesEnabled()
     const { data: requestData } = await request.json()
     const { filterParams, page: reqPage, pageSize: reqPageSize }: { filterParams: FilterParamsSearchAction, page: string, pageSize: string } =
       requestData

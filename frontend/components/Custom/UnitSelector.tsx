@@ -1,5 +1,7 @@
 'use client'
 
+import { getFloorUnits } from '@/lib/property-units'
+
 interface Props {
   currentFloorData: Floor | undefined
   unitId: number
@@ -22,7 +24,7 @@ export function UnitSelector ({ currentFloorData, currentTab, unitId, onUnitIdCh
           </h3>
           <div className='overflow-x-auto whitespace-nowrap'>
             <ul className='flex gap-[20px]'>
-              {currentFloorData?.attributes.units.data
+              {getFloorUnits(currentFloorData)
                 .sort((a, b) => a.attributes.order - b.attributes.order)
                 .map(unit => {
                   const statusColor = unit.attributes.status === 'AVAILABLE'
@@ -60,7 +62,7 @@ export function UnitSelector ({ currentFloorData, currentTab, unitId, onUnitIdCh
       : (
         <div className='overflow-x-auto whitespace-nowrap'>
           <ul className='flex gap-[20px]'>
-            {currentFloorData?.attributes.units.data
+            {getFloorUnits(currentFloorData)
               .sort((a, b) => a.attributes.order - b.attributes.order)
               .map(unit => {
                 const statusColor = unit.attributes.status === 'AVAILABLE'

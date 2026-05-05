@@ -6,10 +6,11 @@ import { AuthForm } from '@/components/Forms/AuthForm'
 import { AuthLayout } from '@/components/Layouts/AuthLayout'
 import { authOptions } from '@/app/api/auth/[...nextauth]/options'
 import { getLastProperty } from '@/app/actions'
-
-const allowPublicProperties = process.env.NEXT_PUBLIC_ALLOW_PUBLIC_PROPERTIES === 'true'
+import { isPublicPropertiesEnabled } from '@/lib/public-properties'
 
 export function generateMetadata (): Metadata {
+  const allowPublicProperties = isPublicPropertiesEnabled()
+
   return {
     title: allowPublicProperties ? 'walkerwholesale - Admin Login' : 'walkerwholesale - Login',
     robots: {

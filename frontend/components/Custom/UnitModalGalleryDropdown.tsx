@@ -2,6 +2,7 @@
 
 import { motion } from 'framer-motion'
 import { ChevronDown, ChevronUp } from 'lucide-react'
+import { getFloorUnits } from '@/lib/property-units'
 
 interface Props {
   caseNumber: number
@@ -43,7 +44,7 @@ export function UnitModalGalleryDropdown ({
             className='bg-gray-800 text-white p-4 smobile:bg-transparent'
           >
             <div onClick={() => toggleDropdown(0)} className='flex justify-between items-center smobile:bg-transparent'>
-              <span className='font-mundialRegular text-white'>{currentFloorData?.attributes.units.data?.find((item) => item.id === parseInt(unitId))?.attributes.identifier}</span>
+              <span className='font-mundialRegular text-white'>{getFloorUnits(currentFloorData).find((item) => item.id === parseInt(unitId))?.attributes.identifier}</span>
               <button className='text-white w-auto h-auto'>
                 {dropdowns[0]
                   ? <ChevronUp className='smobile:stroke-white smobile:w-[20px] smobile:h-[20px]' />
@@ -52,7 +53,7 @@ export function UnitModalGalleryDropdown ({
             </div>
             {dropdowns[0] && (
               <ul className='smobile:flex smobile:flex-col smobile:w-full'>
-                {currentFloorData?.attributes.units.data?.map((item) => (
+                {getFloorUnits(currentFloorData).map((item) => (
                   <li key={item.id}>
                     <button
                       type='button'

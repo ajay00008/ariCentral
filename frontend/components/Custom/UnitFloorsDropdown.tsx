@@ -3,6 +3,7 @@
 import * as React from 'react'
 import { motion } from 'framer-motion'
 import { ChevronDown, ChevronUp } from 'lucide-react'
+import { getPropertyFloors } from '@/lib/property-units'
 
 interface Props {
   onFloorChange: (floorId: number) => void
@@ -48,7 +49,7 @@ export function UnitFloorsDropdown ({ onFloorChange, data, currentFloorData, cur
           className='bg-dropdownWhite flex flex-col h-auto'
         >
           <ul className='mb-auto'>
-            {data.floors.data.map(item => {
+            {getPropertyFloors(data).map(item => {
               if (currentFloorData === undefined) return null
               const isSelected = item.id === currentFloorData.id
                 ? 'pointer-events-none bg-black'

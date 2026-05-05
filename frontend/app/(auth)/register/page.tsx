@@ -6,8 +6,7 @@ import { authOptions } from '@/app/api/auth/[...nextauth]/options'
 import { AuthLayout } from '@/components/Layouts/AuthLayout'
 import { SignUpForm } from '@/components/Forms/SignUpForm'
 import { getLastProperty } from '@/app/actions'
-
-const allowPublicProperties = process.env.NEXT_PUBLIC_ALLOW_PUBLIC_PROPERTIES === 'true'
+import { isPublicPropertiesEnabled } from '@/lib/public-properties'
 
 export function generateMetadata (): Metadata {
   return {
@@ -20,6 +19,8 @@ export function generateMetadata (): Metadata {
 }
 
 export default async function Page (): Promise<React.ReactNode> {
+  const allowPublicProperties = isPublicPropertiesEnabled()
+
   if (allowPublicProperties) {
     redirect('/')
   }

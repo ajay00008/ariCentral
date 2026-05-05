@@ -4,9 +4,9 @@ import { getServerSession } from 'next-auth'
 import { redirect } from 'next/navigation'
 import { DynamicSearch } from '@/utils/DynamicSearch'
 import { authOptions } from '@/app/api/auth/[...nextauth]/options'
+import { isPublicPropertiesEnabled } from '@/lib/public-properties'
 
 export const dynamic = 'force-dynamic'
-const allowPublicProperties = process.env.NEXT_PUBLIC_ALLOW_PUBLIC_PROPERTIES === 'true'
 
 export async function generateMetadata (): Promise<Metadata> {
   return {
@@ -19,9 +19,9 @@ export async function generateMetadata (): Promise<Metadata> {
 }
 
 export default async function Page (): Promise<React.ReactNode> {
-  if (!allowPublicProperties) {
-    redirect('/login')
-  }
+  // if (!isPublicPropertiesEnabled()) {
+  //   redirect('/login')
+  // }
 
   const session: SessionType | null = await getServerSession(authOptions)
   return <DynamicSearch user={session} />

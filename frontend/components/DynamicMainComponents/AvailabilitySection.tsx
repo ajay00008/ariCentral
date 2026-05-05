@@ -3,6 +3,7 @@
 import * as React from 'react'
 import { AvailabilityTable } from '@/components/Tables/AvailabilityTable'
 import { AvailabilityCard } from '../Cards/AvailabilityCard'
+import { getFloorUnits, getPropertyFloors } from '@/lib/property-units'
 
 interface Props {
   data: ActionGetPropertyBySlug
@@ -12,13 +13,15 @@ interface Props {
 export function AvailabilitySection ({ data, currency }: Props): React.ReactNode {
   const [unitsData, setUnitsData] = React.useState<CustomUnit[] | null>(null)
   React.useEffect(() => {
-    if (data.floors.data.length > 0) {
+    const floors = getPropertyFloors(data)
+
+    if (floors.length > 0) {
       const allUnits: UnitWithIndex[] = []
 
-      data.floors.data.forEach((floor, index) => {
+      floors.forEach((floor, index) => {
         if (floor.attributes === undefined || floor.id === undefined) return
 
-        allUnits.push(...floor.attributes.units.data.map(unit => ({ ...unit, floorIndex: index })))
+        allUnits.push(...getFloorUnits(floor).map(unit => ({ ...unit, floorIndex: index })))
       })
 
       allUnits.sort((a, b) => {
@@ -32,6 +35,8 @@ export function AvailabilitySection ({ data, currency }: Props): React.ReactNode
       const customUnits: CustomUnit[] = allUnits.map(({ floorIndex, ...unit }) => ({ ...unit }))
 
       setUnitsData(customUnits)
+    } else {
+      setUnitsData(null)
     }
   }, [data])
 

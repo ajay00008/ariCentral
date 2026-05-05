@@ -4,12 +4,13 @@ import { Codes } from '@/constants/code-errors'
 import { fetchAPI } from '@/api/fetch-api'
 import { getServerSession } from 'next-auth'
 import { authOptions } from '@/app/api/auth/[...nextauth]/options'
+import { isPublicPropertiesEnabled } from '@/lib/public-properties'
 
 export const dynamic = 'force-dynamic'
-const allowPublicProperties = process.env.NEXT_PUBLIC_ALLOW_PUBLIC_PROPERTIES === 'true'
 
 export async function GET (): Promise<NextResponse> {
   try {
+    const allowPublicProperties = isPublicPropertiesEnabled()
     const session: SessionType | null = await getServerSession(authOptions)
     const sessionToken = session?.user?.access_token ?? ''
     if (!allowPublicProperties && sessionToken === '') return NextResponse.json({ message: 'Please, use our official application' }, { status: 503 })

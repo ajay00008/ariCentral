@@ -3,6 +3,7 @@
 import * as React from 'react'
 import { FloorPlanSwiper } from '@/components/Swipers/FloorPlanSwiper'
 import { SwiperControlInterface } from '@/components/Custom/SwiperControlInterface'
+import { getFloorUnits, getPropertyFloors } from '@/lib/property-units'
 
 interface Props {
   data: ActionGetPropertyBySlug
@@ -38,13 +39,15 @@ export function FloorPlansList ({ data, currency, isCommissionEnabled }: Props):
   }
 
   React.useEffect(() => {
-    if (data.floors.data.length > 0) {
+    const floors = getPropertyFloors(data)
+
+    if (floors.length > 0) {
       const allUnits: UnitWithIndex[] = []
 
-      data.floors.data.forEach((floor, index) => {
+      floors.forEach((floor, index) => {
         if (floor.attributes === undefined || floor.id === undefined) return
 
-        allUnits.push(...floor.attributes.units.data.map(unit => ({ ...unit, floorIndex: index })))
+        allUnits.push(...getFloorUnits(floor).map(unit => ({ ...unit, floorIndex: index })))
       })
 
       allUnits.sort((a, b) => {
@@ -58,6 +61,8 @@ export function FloorPlansList ({ data, currency, isCommissionEnabled }: Props):
       const customUnits: CustomUnit[] = allUnits.map(({ floorIndex, ...unit }) => ({ ...unit }))
 
       setUnitsData(customUnits)
+    } else {
+      setUnitsData([])
     }
   }, [data])
 

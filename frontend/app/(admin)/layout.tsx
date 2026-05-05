@@ -14,13 +14,12 @@ import {
 } from '../fonts'
 import { UserTypeBanner } from '@/components/Custom/UserTypeBanner'
 import { authOptions } from '../api/auth/[...nextauth]/options'
+import { isPublicPropertiesEnabled } from '@/lib/public-properties'
 import '../globals.css'
 
 interface RootLayoutProps {
   children: React.ReactNode
 }
-
-const allowPublicProperties = process.env.NEXT_PUBLIC_ALLOW_PUBLIC_PROPERTIES === 'true'
 
 export function generateMetadata (): Metadata {
   return {
@@ -32,6 +31,7 @@ export function generateMetadata (): Metadata {
 }
 
 export default async function RootLayout ({ children }: RootLayoutProps): Promise<React.ReactNode> {
+  const allowPublicProperties = isPublicPropertiesEnabled()
   const session: SessionType | null = await getServerSession(authOptions)
   if (allowPublicProperties && session === null) {
     redirect('/login')

@@ -618,6 +618,67 @@ module.exports = createCoreController(
           500
         )
       }
+    },
+    async findBySlug (ctx) {
+      const { slug } = ctx.params
+
+      if (!allowPublicProperties) {
+        return ctx.unauthorized('You must be logged in to access this resource.')
+      }
+
+      try {
+        const property = await strapi.entityService.findMany(
+          'api::property.property',
+          {
+            filters: {
+              Slug: slug
+            },
+            populate: 'deep',
+            limit: 1
+          }
+        )
+
+        if (property.length === 0) {
+          return ctx.send({ message: 'Property not found' }, 404)
+        }
+
+        return ctx.send(property.map((item) => {
+          const lowerPricedUnit = item.floors?.reduce((lowestUnit, floor) => {
+            const floorUnits = floor.units || []
+            const floorLowestUnit = floorUnits.reduce((lowest, unit) => {
+              return !lowest || unit.price < lowest.price
+                ? unit
+                : lowest
+            }, null)
+
+            return !lowestUnit || (floorLowestUnit && floorLowestUnit.price < lowestUnit.price)
+              ? floorLowestUnit
+              : lowestUnit
+          }, null)
+
+          delete item.AccessRequests
+          delete item.ApprovedUsers
+
+          return {
+            ...item,
+            Address: formatUSAddress(item),
+            Approved: true,
+            RequestStatus: 'approved',
+            LowerPricedUnit: lowerPricedUnit
+              ? {
+                  id: lowerPricedUnit.id,
+                  price: lowerPricedUnit.price
+                }
+              : null
+          }
+        }))
+      } catch (err) {
+        strapi.plugin('sentry').service('sentry').sendError(err)
+        return ctx.send(
+          { error: 'An error occurred while processing the request.' },
+          500
+        )
+      }
     }
   })
 )

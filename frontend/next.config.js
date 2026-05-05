@@ -1,6 +1,8 @@
 const { withSentryConfig } = require('@sentry/nextjs')
 
 const isProd = process.env.NODE_ENV === 'production'
+const allowPublicProperties = process.env.ALLOW_PUBLIC_PROPERTIES === 'true' ||
+  process.env.NEXT_PUBLIC_ALLOW_PUBLIC_PROPERTIES === 'true'
 
 const remotePatterns = [
   {
@@ -35,6 +37,8 @@ const config = {
   },
   assetPrefix: isProd ? process.env.PUBLIC_URL : undefined,
   redirects () {
+    if (allowPublicProperties) return []
+
     return [
       {
         source: '/',

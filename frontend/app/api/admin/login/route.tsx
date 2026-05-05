@@ -61,7 +61,6 @@ export async function POST (request: Request): Promise<NextResponse<APIAdminLogi
       }, { status: response2.status })
     }
 
-    
     const newUser: APIAdminLoginResult['newUser'] = {
       ...(basicUser as Authentication),
       user: {
