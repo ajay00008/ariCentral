@@ -9,6 +9,7 @@ import { useUnitModalProvider } from '@/providers/UnitModalProvider'
 import { heroImages } from '@/lib/hero-images'
 import { ChevronLeftIcon, ChevronRightIcon } from 'lucide-react'
 import { cn } from '@/lib/utils'
+import { getPropertyUnits } from '@/lib/property-units'
 
 interface HeroSectionProps {
   data: ActionGetPropertyBySlug
@@ -26,7 +27,7 @@ export function HeroSection ({ data, isCommissionEnabled, isPreview }: HeroSecti
   }
 
   const dataHeroImages = heroImages(data)
-  const units = data.floors.data.map((floor) => floor.attributes.units.data).flat()
+  const units = getPropertyUnits(data)
 
   const arrowsClassName = cn('text-white opacity-70 hover:opacity-100 transition duration-200 flex items-center justify-center w-[25px] shrink-0')
 

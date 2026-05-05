@@ -15,6 +15,7 @@ import { Label } from '@/components/ui/label'
 import { useAlertProvider } from '@/providers/AlertProvider'
 import { Codes } from '@/constants/code-errors'
 import Link from 'next/link'
+import { isPublicPropertiesEnabledClient } from '@/lib/public-properties'
 
 interface AuthFormProps {
   login?: boolean
@@ -31,7 +32,7 @@ export function AuthForm ({ login }: AuthFormProps): React.ReactNode {
     password: ''
   })
   const [loading, setLoading] = React.useState<boolean>(false)
-  const allowPublicProperties = process.env.NEXT_PUBLIC_ALLOW_PUBLIC_PROPERTIES === 'true'
+  const allowPublicProperties = isPublicPropertiesEnabledClient()
 
   function handleChange (e: React.ChangeEvent<HTMLInputElement>): void {
     const { value, name } = e.target

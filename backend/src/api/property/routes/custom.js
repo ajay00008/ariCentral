@@ -97,6 +97,14 @@ module.exports = {
       }
     },
     {
+      method: 'GET',
+      path: '/property/slug/:slug',
+      handler: 'property.findBySlug',
+      config: {
+        auth: false
+      }
+    },
+    {
       method: 'POST',
       path: '/property/:slug/request-access',
       handler: 'property.requestAccess'

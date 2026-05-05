@@ -6,6 +6,7 @@ import assets from '@/assets'
 import Image from 'next/image'
 import { UnitModalGalleryDropdown } from './UnitModalGalleryDropdown'
 import { LoaderSpinner } from '../Spinners/LoaderSpinner'
+import { getFloorUnits, getPropertyUnits } from '@/lib/property-units'
 
 interface Props {
   data: ActionGetPropertyBySlug
@@ -172,10 +173,7 @@ export function UnitModalGallery ({ data, views, unitId, currentFloorData, onUni
 
   React.useEffect(() => {
     if (data !== undefined) {
-      const unit = data.floors.data.map(item => {
-        if (unitId === undefined) return null
-        return item.attributes.units.data.find(item => item.id === parseInt(unitId))
-      }).filter(Boolean)
+      const unit = getPropertyUnits(data).filter(item => item.id === parseInt(unitId))
 
       if (unit[0]?.attributes.unitGallery === undefined) return
       setUnitGallery(unit[0].attributes.unitGallery)
@@ -538,7 +536,7 @@ export function UnitModalGallery ({ data, views, unitId, currentFloorData, onUni
           )}
           {!views && (
             <ul className='smobile:hidden smobile:h-0 laptop:flex laptop:h-auto laptop:absolute laptop:flex-col laptop:w-full laptop:left-[20px] laptop:m-0 laptop:top-[20px] laptop:max-w-[166px]'>
-              {currentFloorData?.attributes.units.data?.map((item, index) => (
+              {getFloorUnits(currentFloorData).map((item) => (
                 <li key={item.id}>
                   <button
                     type='button'

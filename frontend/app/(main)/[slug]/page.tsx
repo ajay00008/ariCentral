@@ -6,11 +6,12 @@ import { DynamicPage } from '@/utils/DynamicPage'
 import { DynamicView } from '@/utils/DynamicView'
 import { authOptions } from '@/app/api/auth/[...nextauth]/options'
 import { getDynamicPageFromCollectionById, getStaticPageById } from '@/app/actions'
+import { isPublicPropertiesEnabled } from '@/lib/public-properties'
 
 export const dynamic = 'force-dynamic'
-const allowPublicProperties = process.env.NEXT_PUBLIC_ALLOW_PUBLIC_PROPERTIES === 'true'
 
 export async function generateMetadata ({ params }: { params: { slug: string } }): Promise<Metadata> {
+  const allowPublicProperties = isPublicPropertiesEnabled()
   const data2 = await getDynamicPageFromCollectionById(params.slug)
 
   if (data2 !== null) {
@@ -48,6 +49,7 @@ export async function generateMetadata ({ params }: { params: { slug: string } }
 }
 
 export default async function Page ({ params }: { params: { slug: string } }): Promise<React.ReactNode> {
+  const allowPublicProperties = isPublicPropertiesEnabled()
   const serverData2 = await getDynamicPageFromCollectionById(params.slug)
 
   if (serverData2 !== null) {
@@ -61,15 +63,10 @@ export default async function Page ({ params }: { params: { slug: string } }): P
     redirect('/login')
   }
 
-  const serverData = await getStaticPageById(params.slug, allowPublicProperties ? undefined : sessionToken)
-
+  const serverData = await getStaticPageById(params.slug, sessionToken)
+  console.log(serverData,"serverData", params.slug ,"params.slug", allowPublicProperties,"allowPublicProperties")
   if (serverData !== null) {
     return <DynamicView data={serverData} />
   }
 
-  if (!allowPublicProperties) {
-    redirect('/login')
-  }
-
-  notFound()
 }

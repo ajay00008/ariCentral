@@ -8,8 +8,10 @@ import { UnitModalVTour } from '@/components/Custom/UnitModalVTour'
 import { UnitSummary } from '@/components/Custom/UnitSummary'
 import { UnitTabs } from '@/components/Lists/UnitTabs'
 import { heroImages } from '@/lib/hero-images'
+import { getFloorUnits, getPropertyFloors, getPropertyUnits } from '@/lib/property-units'
 import { useUnitModalProvider } from '@/providers/UnitModalProvider'
 import { TitleCapitalize } from '@/utils/capitalize'
+import { isPublicPropertiesEnabledClient } from '@/lib/public-properties'
 import { X } from 'lucide-react'
 import { useSession } from 'next-auth/react'
 import Image from 'next/image'
@@ -47,7 +49,7 @@ export function closeModalWithAnimation (elementId: string, isNested?: boolean):
 export function UnitDetailsModal ({ data, currency, isPreview }: Props): React.ReactNode {
   const { closeModal, isModalOpen, tab, unitId } = useUnitModalProvider()
   const { data: session } = useSession()
-  const allowPublicProperties = process.env.NEXT_PUBLIC_ALLOW_PUBLIC_PROPERTIES === 'true'
+  const allowPublicProperties = isPublicPropertiesEnabledClient()
   if (!allowPublicProperties && session === null && isPreview !== true) {
     return null
   }
@@ -74,10 +76,12 @@ export function UnitDetailsModal ({ data, currency, isPreview }: Props): React.R
   }
 
   function handleSetCurrentFloor (floorId: number): void {
-    const foundedFloor = data.floors.data.find(item => item.id === floorId)
+    const foundedFloor = getPropertyFloors(data).find(item => item.id === floorId)
     if (foundedFloor === undefined) return
+    const firstUnit = getFloorUnits(foundedFloor)[0]
+    if (firstUnit === undefined) return
     setCurrentFloorData(foundedFloor)
-    handleChangeUnitId(foundedFloor.attributes.units.data[0].id)
+    handleChangeUnitId(firstUnit.id)
   }
 
   function handleCloseModal (): void {
@@ -120,17 +124,7 @@ export function UnitDetailsModal ({ data, currency, isPreview }: Props): React.R
 
   React.useEffect(() => {
     if (stableUnitId !== null) {
-      const allUnits: CustomUnit[] = []
-
-      data.floors.data.map((item) => {
-        const units = item.attributes.units.data.map((item) => {
-          return allUnits.push(item)
-        })
-
-        return units
-      })
-
-      const foundedUnit = allUnits.find(item => item.id === stableUnitId)
+      const foundedUnit = getPropertyUnits(data).find(item => item.id === stableUnitId)
       setUnitData(foundedUnit)
       if (foundedUnit === undefined) return
       const unitStatusBG = foundedUnit.attributes.status === 'AVAILABLE'
@@ -161,7 +155,7 @@ export function UnitDetailsModal ({ data, currency, isPreview }: Props): React.R
     if (stableUnitId !== null && unitData !== undefined) {
       const floorId = unitData?.attributes.floor.data.id
 
-      const foundedFloor = data.floors.data.find(item => item.id === floorId)
+      const foundedFloor = getPropertyFloors(data).find(item => item.id === floorId)
       setCurrentFloorData(foundedFloor)
     }
   }, [unitData])
@@ -180,7 +174,7 @@ export function UnitDetailsModal ({ data, currency, isPreview }: Props): React.R
             <div className='laptop:flex laptop:flex-col laptop:w-full laptop:bg-black laptop:h-screen laptop:justify-between'>
               <div className='laptop:flex laptop:flex-col laptop:w-full laptop:divide-y'>
                 <ul>
-                  {data.floors.data.map(item => {
+                  {getPropertyFloors(data).map(item => {
                     if (currentFloorData === undefined) return null
                     const isSelected = item.id === currentFloorData.id
                       ? 'pointer-events-none'

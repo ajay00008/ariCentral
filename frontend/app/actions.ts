@@ -4,8 +4,21 @@ import { fetchAPI } from '@/api/fetch-api'
 import { z } from 'zod'
 import { EventTypeKeys } from '@/constants/event-type'
 import { transformPropertyResponse } from '@/lib/utils'
+import { isPublicPropertiesEnabled } from '@/lib/public-properties'
 
 export async function getStaticPageById (id: string, sessionToken?: string): Promise<ActionGetPropertyBySlug | null> {
+  if (isPublicPropertiesEnabled() && sessionToken === undefined) {
+    const publicResponse: Response = await fetchAPI(`/api/property/slug/${encodeURIComponent(id)}`, {
+      method: 'GET',
+      token: undefined
+    }, false, true, true) as Response
+    if (!publicResponse.ok) return null
+
+    const publicData = await publicResponse.json() as unknown[]
+
+    return publicData.length > 0 ? transformPropertyResponse(publicData[0]) : null
+  }
+
   const data: Response = await fetchAPI(`/api/properties?filters[Slug][$eq]=${id}&pagination[pageSize]=100&populate=deep`, {
     method: 'GET',
     token: sessionToken

@@ -7,6 +7,14 @@ module.exports = {
       config: {
         auth: false
       }
+    },
+    {
+      method: 'GET',
+      path: '/rate/current',
+      handler: 'rate.current',
+      config: {
+        auth: false
+      }
     }
   ]
 }

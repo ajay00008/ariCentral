@@ -7,19 +7,18 @@ export const dynamic = 'force-dynamic'
 
 export async function GET (): Promise<NextResponse> {
   try {
-    const response: Response = await fetchAPI('/api/rate', {
+    const response: Response = await fetchAPI('/api/rate/current', {
       method: 'GET',
       token: undefined
-    }, false, true)
+    }, false, true, true)
     const data = await response.json()
-    const currentCurrency = data.data.attributes
 
     if (response.ok) {
-      return NextResponse.json(currentCurrency, { status: 200 })
+      return NextResponse.json(data, { status: 200 })
     } else {
       return NextResponse.json({
         code: response.status,
-        message: response.statusText
+        message: data?.error?.message ?? response.statusText
       }, { status: response.status })
     }
   } catch (err) {
