@@ -34,7 +34,11 @@ module.exports = {
       setPermission('public', 'api::property.property.findOne', allowPublicProperties),
       setPermission('public', 'api::property.property.create', false),
       setPermission('public', 'api::property.property.update', false),
-      setPermission('public', 'api::property.property.delete', false)
+      setPermission('public', 'api::property.property.delete', false),
+      setPermission('public', 'api::floor.floor.find', allowPublicProperties),
+      setPermission('public', 'api::floor.floor.findOne', allowPublicProperties),
+      setPermission('public', 'api::unit.unit.find', allowPublicProperties),
+      setPermission('public', 'api::unit.unit.findOne', allowPublicProperties)
     ])
   }
 }
