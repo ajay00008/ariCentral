@@ -63,10 +63,8 @@ export default async function Page ({ params }: { params: { slug: string } }): P
     redirect('/login')
   }
 
-  const serverData = await getStaticPageById(params.slug, sessionToken)
-  console.log(serverData,"serverData", params.slug ,"params.slug", allowPublicProperties,"allowPublicProperties")
+  const serverData = await getStaticPageById(params.slug, allowPublicProperties && sessionToken === '' ? undefined : sessionToken)
   if (serverData !== null) {
     return <DynamicView data={serverData} />
   }
-
 }

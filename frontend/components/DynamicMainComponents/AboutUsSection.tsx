@@ -84,7 +84,7 @@ export function AboutUsSection ({ data, isPreview }: Props): React.ReactNode {
                   style={{ color: 'white' }}
                   width={30}
                   height={30}
-                  className='smobile:absolute smobile:bottom-0 smobile:right-0 smobile:bg-orange group-hover:bg-transparent transition duration-200'
+                  className='smobile:absolute smobile:bottom-0 smobile:right-0 smobile:bg-blue-500 group-hover:bg-transparent transition duration-200'
                 />
               </div>
               <a
@@ -111,7 +111,7 @@ export function AboutUsSection ({ data, isPreview }: Props): React.ReactNode {
                   style={{ color: 'white' }}
                   width={30}
                   height={30}
-                  className='smobile:absolute smobile:bottom-0 smobile:right-0 smobile:bg-orange group-hover:bg-transparent transition duration-200'
+                  className='smobile:absolute smobile:bottom-0 smobile:right-0 smobile:bg-blue-500 group-hover:bg-transparent transition duration-200'
                 />
               </Link>
             </div>
@@ -137,7 +137,7 @@ export function AboutUsSection ({ data, isPreview }: Props): React.ReactNode {
                   style={{ color: 'white' }}
                   width={30}
                   height={30}
-                  className='smobile:absolute smobile:bottom-0 smobile:right-0 smobile:bg-orange group-hover:bg-transparent transition duration-200'
+                  className='smobile:absolute smobile:bottom-0 smobile:right-0 smobile:bg-blue-500 group-hover:bg-transparent transition duration-200'
                 />
               </Link>
             </div>
@@ -155,7 +155,7 @@ export function AboutUsSection ({ data, isPreview }: Props): React.ReactNode {
                   style={{ color: 'white' }}
                   width={30}
                   height={30}
-                  className='smobile:absolute smobile:bottom-0 smobile:right-0 smobile:bg-orange group-hover:bg-transparent transition duration-200'
+                  className='smobile:absolute smobile:bottom-0 smobile:right-0 smobile:bg-blue-500 group-hover:bg-transparent transition duration-200'
                 />
               </Link>
             </div>
@@ -179,7 +179,7 @@ export function AboutUsSection ({ data, isPreview }: Props): React.ReactNode {
                   style={{ color: 'white' }}
                   width={30}
                   height={30}
-                  className='smobile:absolute smobile:bottom-0 smobile:right-0 smobile:bg-orange group-hover:bg-transparent transition duration-200'
+                  className='smobile:absolute smobile:bottom-0 smobile:right-0 smobile:bg-blue-500 group-hover:bg-transparent transition duration-200'
                 />
               </Link>
             </div>
@@ -202,7 +202,7 @@ export function AboutUsSection ({ data, isPreview }: Props): React.ReactNode {
                   style={{ color: 'white' }}
                   width={30}
                   height={30}
-                  className='smobile:absolute smobile:bottom-0 smobile:right-0 smobile:bg-orange group-hover:bg-transparent transition duration-200'
+                  className='smobile:absolute smobile:bottom-0 smobile:right-0 smobile:bg-blue-500 group-hover:bg-transparent transition duration-200'
                 />
               </Link>
             </div>

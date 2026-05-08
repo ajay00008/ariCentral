@@ -11,7 +11,7 @@ export async function getStaticPageById (id: string, sessionToken?: string): Pro
     const publicResponse: Response = await fetchAPI(`/api/property/slug/${encodeURIComponent(id)}`, {
       method: 'GET',
       token: undefined
-    }, false, true, true) as Response
+    }, false, true, true)
     if (!publicResponse.ok) return null
 
     const publicData = await publicResponse.json() as unknown[]
