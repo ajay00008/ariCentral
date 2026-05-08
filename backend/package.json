@@ -28,11 +28,11 @@
     "npm": ">=6.0.0"
   },
   "scripts": {
-    "build": "strapi build",
-    "dev": "strapi develop",
+    "build": "node init && strapi build",
+    "dev": "node init && strapi develop",
     "lint": "standard",
-    "start": "strapi start",
-    "start:staging": "ENV_PATH=.env.staging strapi develop",
+    "start": "node init && strapi start",
+    "start:staging": "node init && ENV_PATH=.env.staging strapi develop",
     "strapi": "strapi",
     "test": "npm run lint"
   },

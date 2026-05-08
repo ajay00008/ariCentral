@@ -14,9 +14,9 @@
     "standard": "^17.1.2"
   },
   "scripts": {
-    "dev": "nodemon cron.js",
+    "dev": "node init && nodemon cron.js",
     "lint": "standard",
-    "start": "node cron.js",
+    "start": "node init && node cron.js",
     "test": "npm run lint"
   }
 }

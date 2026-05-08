@@ -85,11 +85,11 @@
     }
   },
   "scripts": {
-    "build": "next build",
-    "dev": "next dev",
+    "build": "node init && next build",
+    "dev": "node init && next dev",
     "format": "ts-standard --fix",
     "lint": "ts-standard",
-    "start": "next start",
+    "start": "node init && next start",
     "test": "npm run lint && npm run typecheck",
     "typecheck": "tsc --noEmit"
   }

@@ -1,6 +1,4 @@
 # Environment variables and local secrets
-.env
-.env.*
 !.env.example
 !.env.sample
 
@@ -28,7 +26,6 @@ coverage/
 .DS_Store
 Thumbs.db
 .idea/
-.vscode/
 
 # Temporary files
 .cache/
@@ -36,3 +33,7 @@ Thumbs.db
 tmp/
 .codex/
 .agents/
+temp_auto_push.bat
+temp_interactive_push.bat
+branch_structure.json
+config.bat
