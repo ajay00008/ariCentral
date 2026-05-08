@@ -13,6 +13,10 @@ interface Props {
 
 export function HeroPropertyData ({ data, isCommissionEnabled, isPreview }: Props): React.ReactNode {
   const { openModal } = useFormProvider()
+  const bookACallLink = data.BookACallLink ?? ''
+  const makeAnOfferLink = data.MakeAnOfferLink ?? ''
+  const isBookACallEnabled = bookACallLink.trim() !== '' && !bookACallLink.includes(' disabled')
+  const isMakeAnOfferEnabled = makeAnOfferLink.trim() !== '' && !makeAnOfferLink.includes(' disabled')
 
   return (
     <div className='smobile:flex smobile:flex-col smobile:h-fit smobile:mt-[30px] mobile:mt-[33px] laptop:mt-0 laptop:h-full laptop:justify-between'>
@@ -54,12 +58,12 @@ export function HeroPropertyData ({ data, isCommissionEnabled, isPreview }: Prop
       </div>
       <div className='flex flex-col'>
         <div className='smobile:w-full smobile:gap-[8px] smobile:flex smobile:flex-col'>
-          {(data.BookACallLink !== null && !data.BookACallLink.includes(' disabled')) && isPreview !== true && (
+          {isBookACallEnabled && isPreview !== true && (
             <Link
               href='#'
               onClick={(e) => {
                 e.preventDefault()
-                openModal(data.BookACallLink, undefined)
+                openModal(bookACallLink, undefined)
               }}
               title='BOOK A CALL'
               className='smobile:shrink-0 smobile:bg-black smobile:items-center smobile:text-center smobile:text-white smobile:py-[21px] smobile:font-mundialRegular smobile:text-[16px] smobile:leading-[1] smobile:hover:bg-[#303030] tablet:max-w-[395px] laptop:text-[14px] transition duration-200'
@@ -67,13 +71,13 @@ export function HeroPropertyData ({ data, isCommissionEnabled, isPreview }: Prop
               BOOK A CALL
             </Link>
           )}
-          {(data.MakeAnOfferLink !== null && !data.MakeAnOfferLink.includes(' disabled')) && isPreview !== true && (
+          {isMakeAnOfferEnabled && isPreview !== true && (
             <Link
               href='#'
               onClick={(e): void => {
                 e.preventDefault()
                 trackEvent(data.Slug, EventType.MAKE_OFFER_CLICK)
-                openModal(data.MakeAnOfferLink, undefined)
+                openModal(makeAnOfferLink, undefined)
               }}
               title='MAKE AN OFFER'
               className='smobile:shrink-0 smobile:py-[21px] smobile:text-white smobile:font-mundialRegular smobile:text-[16px] smobile:leading-[1] smobile:text-center smobile:items-center smobile:bg-orange smobile:hover:bg-[#ED8E4E] tablet:max-w-[395px] laptop:text-[14px] transition duration-200'

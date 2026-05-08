@@ -6,6 +6,36 @@ import { EventTypeKeys } from '@/constants/event-type'
 import { transformPropertyResponse } from '@/lib/utils'
 import { isPublicPropertiesEnabled } from '@/lib/public-properties'
 
+type NullablePropertyTextFields = Pick<
+ActionGetPropertyBySlug,
+'Address' |
+'Architect' |
+'Builder' |
+'Developer' |
+'BookACallLink' |
+'MakeAnOfferLink' |
+'ProjectWebsiteLink' |
+'RegisterForUpdatesCode' |
+'Summary'
+>
+
+function normalizePropertyTextFields (
+  data: ActionGetPropertyBySlug & { [K in keyof NullablePropertyTextFields]: string | null }
+): ActionGetPropertyBySlug {
+  return {
+    ...data,
+    Address: data.Address ?? '',
+    Architect: data.Architect ?? '',
+    Builder: data.Builder ?? '',
+    Developer: data.Developer ?? '',
+    BookACallLink: data.BookACallLink ?? '',
+    MakeAnOfferLink: data.MakeAnOfferLink ?? '',
+    ProjectWebsiteLink: data.ProjectWebsiteLink ?? '',
+    RegisterForUpdatesCode: data.RegisterForUpdatesCode ?? '',
+    Summary: data.Summary ?? ''
+  }
+}
+
 export async function getStaticPageById (id: string, sessionToken?: string): Promise<ActionGetPropertyBySlug | null> {
   if (isPublicPropertiesEnabled() && sessionToken === undefined) {
     const publicResponse: Response = await fetchAPI(`/api/property/slug/${encodeURIComponent(id)}`, {
@@ -25,7 +55,11 @@ export async function getStaticPageById (id: string, sessionToken?: string): Pro
   }, false, true)
 
   const res = await data.json()
-  return res.data?.[0]?.attributes ?? null
+  const property = res.data?.[0]?.attributes as
+    | (ActionGetPropertyBySlug & { [K in keyof NullablePropertyTextFields]: string | null })
+    | undefined
+
+  return property !== undefined ? normalizePropertyTextFields(property) : null
 }
 export async function getPropertyByShareToken (id: string): Promise<ActionGetPropertyBySlug | null> {
   const response: Response = await fetchAPI(`/api/property/share/${id}`, {
